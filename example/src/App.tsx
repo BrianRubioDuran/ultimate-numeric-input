@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
-import RNModuleTemplate, { Counter } from 'react-native-module-template'
+import { Counter } from 'ultimate-numeric-input'
 
 const App = () => {
   useEffect(() => {
-    console.log(RNModuleTemplate)
+    console.log('')
   })
 
   return <Counter />
