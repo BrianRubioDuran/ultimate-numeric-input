@@ -3,26 +3,30 @@
   "version": "1.0.0",
   "description": "",
   "homepage": "https://github.com/BrianRubioDuran/ultimate-numeric-input",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "author": "Brian Rubio Duran <brian_rubio_duran@outlook.com>",
+  "main": "lib/module/index.js",
+  "types": "lib/typescript/index.d.ts",
+  "author": "Brian Rubio Duran xxxx <brian_rubio_duran@outlook.com>",
   "license": "MIT",
   "files": [
-    "lib"
+    "lib/",
+    "src/"
   ],
   "scripts": {
     "compile": "rm -rf lib && tsc -p .",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "prepare": "yarn compile",
-    "test": "jest"
+    "test": "jest",
+    "prepare": "bob build"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/runtime": "^7.12.5",
+    "@react-native-community/bob": "^0.17.1",
     "@react-native-community/eslint-config": "^2.0.0",
     "@types/jest": "^26.0.20",
+    "@types/numeral": "^2.0.1",
     "@types/react-native": "^0.63.46",
     "@types/react-test-renderer": "^17.0.0",
+    "@types/styled-components-react-native": "^5.1.1",
     "babel-jest": "^26.6.3",
     "eslint": "^7.19.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
@@ -47,5 +51,14 @@
       "json",
       "node"
     ]
+  },
+  "dependencies": {
+    "numeral": "^2.0.6",
+    "styled-components": "^5.2.1"
+  },
+  "@react-native-community/bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": ["module", "typescript"]
   }
 }
