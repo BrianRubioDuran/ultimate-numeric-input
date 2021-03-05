@@ -18,7 +18,7 @@ interface IProps {
   borderColor?: string
   backgroundColor?: string
   textColor?: string
-  hasDecimals?: boolean
+  allowDecimals?: boolean
   numberOfDecimals?: number
   value?: string
   onChangeText: (value: string) => void
@@ -31,12 +31,18 @@ interface IProps {
   maxLength?: number
   fontFamily?: string
   lockWidth?: boolean
+  height?: number | string
+  width?: number | string
+  negativeSymbolColor?: string
 }
-
 interface IInputProps {
   editable?: boolean
   borderRadius?: number
   borderColor?: string
+  backgroundColor?: string
+  textColor?: string
+  height?: number | string
+  width?: number | string
 }
 
 interface IWrapper {
@@ -51,9 +57,8 @@ const Input = styled.TextInput`
   flex-grow: 1;
   width: 90%;
   align-self: stretch;
-  background-color: #fff;
-  color: #000;
-  font-family: 'SFProDisplay-Regular';
+  background-color: ${(props: IInputProps) => props.backgroundColor};
+  color: ${(props: IInputProps) => props.textColor};
   font-size: 16px;
 `
 
@@ -74,12 +79,15 @@ const AccessoryContainer = styled.View`
 
 const InputContainer = styled.View<IInputProps>`
   background-color: ${(props: IInputProps) =>
-    props.editable ? '#FFF' : '#E0E0E0'};
+    props.editable ? props.backgroundColor : '#E0E0E0'};
   padding: 5px;
   align-items: center;
   flex-direction: row;
   flex-grow: 1;
-  height: 60px;
+  height: ${(props: IInputProps) =>
+    typeof props.height === 'number' ? `${props.height}px` : props.height};
+  width: ${(props: IInputProps) =>
+    typeof props.width === 'number' ? `${props.width}px` : props.width};
   border-color: ${(props: IInputProps) => props.borderColor};
   border-width: 1px;
   border-radius: ${(props: IInputProps) => props.borderRadius}px;
@@ -87,7 +95,7 @@ const InputContainer = styled.View<IInputProps>`
 
 function NumericInput({
   onChangeText,
-  hasDecimals = false,
+  allowDecimals = false,
   numberOfDecimals = 2,
   value,
   editable = true,
@@ -103,6 +111,10 @@ function NumericInput({
   backgroundColor = '#FFFFFF',
   lockWidth = false,
   fontFamily,
+  textColor = '#000',
+  height = 60,
+  width = '100%',
+  negativeSymbolColor = '#000',
 }: IProps): React.ReactElement {
   const [maxWidth, setMaxWidth] = React.useState<number | null>(null)
   const [isNegative, setIsNegative] = React.useState<boolean>(
@@ -134,7 +146,7 @@ function NumericInput({
           : integral
         let aux = integralWithThousands
         let parentText = integral
-        if (hasDecimals) {
+        if (allowDecimals) {
           if (!decimal) {
             // localValue = text;
             aux = integralWithThousands
@@ -162,7 +174,7 @@ function NumericInput({
       }
     },
     [
-      hasDecimals,
+      allowDecimals,
       isNegative,
       numberOfDecimals,
       onChangeText,
@@ -189,7 +201,7 @@ function NumericInput({
   }, [isNegative])
 
   return (
-    <Wrapper backgroundColor={backgroundColor}>
+    <Wrapper>
       {/* add the negative button to ios */}
       {Platform.OS === 'ios' && allowNegatives && (
         <InputAccessoryView nativeID={inputAccessoryViewID}>
@@ -204,8 +216,11 @@ function NumericInput({
         borderColor={borderColor}
         borderRadius={borderRadius}
         editable={editable}
+        backgroundColor={backgroundColor}
+        width={width}
+        height={height}
       >
-        {isNegative && <Text>-</Text>}
+        {isNegative && <Text style={{ color: negativeSymbolColor }}>-</Text>}
         <Input
           onChangeText={handleChangeText}
           placeholder={placeholder}
@@ -215,9 +230,12 @@ function NumericInput({
           editable={editable}
           value={localValue}
           onBlur={onBlur}
+          backgroundColor={backgroundColor}
+          textColor={textColor}
           style={{
             maxWidth: maxWidth || undefined,
             fontFamily: fontFamily || undefined,
+            backgroundColor: backgroundColor,
           }}
           onKeyPress={onNegativePressedAndroid}
           onFocus={onFocus}
