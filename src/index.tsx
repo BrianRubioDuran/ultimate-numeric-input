@@ -57,7 +57,7 @@ const Input = styled.TextInput`
   flex-grow: 1;
   width: 90%;
   align-self: stretch;
-  background-color: ${(props: IInputProps) => props.backgroundColor};
+  background-color: transparent;
   color: ${(props: IInputProps) => props.textColor};
   font-size: 16px;
 `

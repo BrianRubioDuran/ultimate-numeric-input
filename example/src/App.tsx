@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Counter } from 'ultimate-numeric-input'
+import { Counter } from 'react-native-ultimate-numeric-input'
 
 const App = () => {
   useEffect(() => {
