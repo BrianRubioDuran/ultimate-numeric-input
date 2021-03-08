@@ -31,6 +31,26 @@ Why should you use this component?
 |           height           | number \| string |
 |           width            | number \| string |
 
-## Example
+# Example
+
+```javascript
+import React, { useEffect } from 'react'
+
+import NumericInput from 'react-native-ultimate-numeric-input'
+
+const App = () => {
+  const onChangeText = React.useCallback((text) => {
+    console.log(text)
+  }, [])
+
+  return (
+    <NumericInput onChangeText={onChangeText} allowDecimals allowNegatives />
+  )
+}
+
+export default App
+```
+
+# Image
 
 ![Example](https://i.ibb.co/G5xkVXQ/Simulator-Screen-Shot-i-Phone-12-mini-2021-03-05-at-13-00-57.png)

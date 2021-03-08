@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react'
-import { Counter } from 'react-native-ultimate-numeric-input'
+import NumericInput from 'react-native-ultimate-numeric-input'
 
 const App = () => {
-  useEffect(() => {
-    console.log('')
-  })
+  const onChangeText = React.useCallback((text) => {
+    console.log(text)
+  }, [])
 
-  return <Counter />
+  return (
+    <NumericInput onChangeText={onChangeText} allowDecimals allowNegatives />
+  )
 }
 
 export default App

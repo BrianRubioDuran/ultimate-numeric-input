@@ -1,8 +1,8 @@
 {
   "name": "react-native-ultimate-numeric-input",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "",
-  "homepage": "https://github.com/BrianRubioDuran/react-native-ultimate-numeric-input",
+  "homepage": "https://github.com/BrianRubioDuran/ultimate-numeric-input",
   "main": "lib/module/index.js",
   "types": "lib/typescript/index.d.ts",
   "author": "Brian Rubio Duran xxxx <brian_rubio_duran@outlook.com>",
